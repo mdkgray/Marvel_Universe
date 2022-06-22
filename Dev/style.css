@@ -1,4 +1,6 @@
-
+* {
+    font-family: 'Quicksand', sans-serif;
+}
 body {
     background-color: #919191;
 }
@@ -10,18 +12,33 @@ header {
     background-color: rgb(255, 255, 255);
 }
 
-.headerWrap img {
+.headerWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#headerLogo {
     float: left;
     width: 200px;
     height: 200px;
     background: rgb(255, 255, 255);
+}
+
+#headerText {
+    float: right;
+}
+
+#heroImage {
+    width: 100%;
+    opacity: 0.5;
 }
       
 .mainTitle {
     display: flex;
     transform: translate(5%, 5%);
     text-transform: uppercase;
-    font-family: verdana;
+    /* font-family: verdana; */
     font-size: 7em;
     font-weight: 700;
     color: red;
