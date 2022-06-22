@@ -14,7 +14,8 @@
 
   <!-- FontAwesome 5.11.2 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
- 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Staatliches&display=swap" rel="stylesheet">
   <!-- The css normalize file, should load first to avoid reverting styles -->
   <link rel="stylesheet" href="./assets/css/normalize.css"/>
   <!-- This is the css file link-->
@@ -31,33 +32,47 @@
   <!-- This is the header-->
   <header>
     <div class="headerWrap">
-      <img src="./Dev/Images/Logo.png" alt="logo"/>
-      <div class="mainTitletext-center p-4 mb-2 bg-danger text-white display-1">MARVELLOUS</div>
+      <!-- <img id="headerLogo" src="./Dev/Images/Logo.png" alt="logo"/> -->
+      <div id="headerText" class="mainTitle text-center p-4 mb-2 bg-danger text-white display-1">MARVELLOUS</div>
     </div>
   </header>
+
   <!-- This is the option section-->
-  <section>
-    <div class="sectionOptions">
-      <h1><em>Take Your Pick!</em></h1>
-        <div class="optionsButtons">
-          <button class="characterButton">Character</button>
-          <button class="movieButton">Movie</button>
-          <button class="ComicButton">Comic</button>
-        </div>
-    </div>
-  </section>
+  <div class="container px-4 vstack gap-3 m-5">
+        <div class="row row-cols-2 gx-5">
+            <div class="sectionOptions col-4">
+                <h1 class="text-center">Select What To Include</h1>
+                <div class="searchOptions d-grid gap-2 ">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Character</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Movie</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Comic</label>
+                    </div>
+                    <button class="searchButton btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
 
-  <div class="backgroundImage">
-    <img src="./Dev/Images/Minimal.jpg" alt="Minimal"/>
+            <div class="main col-8 ml-5">
+                <div class="mainWrap">
+                  <h2>Search Results for:<span class="searchParameters"></span></h2>
+                  <div class="searchResults"></div>
+                </div>
+            </div>
 
-  </div> 
-  <!-- This is the main section-->
-  <div class="main">
-    <div class="mainWrap">
-      <div class="leftSidebar"></div>
-      <div class="mainContent"></div>
+            <div class="sectionOptions col-4 mt-5 text-center">
+                <h2>Search History</h2>
+                <ul class="searchHistory"></ul>
+            </div>
+        </div>       
     </div>
-  </div>
+
 
 
   <!-- This is the footer-->
