@@ -1,26 +1,76 @@
+<!-- This is the document type-->
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- This is the document head-->
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap 5.2.0 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <!-- FontAwesome 5.11.2 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <!-- Our CSS -->
-    <link rel="stylesheet" href="./Dev/style.css"/>
-    <title>Marvel Universe</title>
-</head>
-<body>
-    <header></header>
-
-    <main></main>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
+  <!-- Bootstrap 5.2.0 -->      
+  <!-- Should we use V 4.0?? -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-    <!-- Bootstrap Javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <!-- Our Javascript -->
-    <script src="./Dev/script.js"></script>
+  <!-- FontAwesome 5.11.2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+ 
+  <!-- The css normalize file, should load first to avoid reverting styles -->
+  <link rel="stylesheet" href="./assets/css/normalize.css"/>
+  <!-- This is the css file link-->
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
+  <!-- This is a favicon  -->
+  <link rel="icon" type="image/x-icon" href="./assets/images/Favicon.png"/>
+  <!-- This is the page title  -->    
+  <title>Marvellous Universe</title>
+</head>
+
+<!-- This is the document body-->
+<body>
+
+  <!-- This is the header-->
+  <header>
+    <div class="headerWrap">
+      <img src="./Dev/Images/Logo.png" alt="logo"/>
+      <div class="mainTitletext-center p-4 mb-2 bg-danger text-white display-1">MARVELLOUS</div>
+    </div>
+  </header>
+  <!-- This is the option section-->
+  <section>
+    <div class="sectionOptions">
+      <h1><em>Take Your Pick!</em></h1>
+        <div class="optionsButtons">
+          <button class="characterButton">Character</button>
+          <button class="movieButton">Movie</button>
+          <button class="ComicButton">Comic</button>
+        </div>
+    </div>
+  </section>
+
+  <div class="backgroundImage">
+    <img src="./Dev/Images/Minimal.jpg" alt="Minimal"/>
+
+  </div> 
+  <!-- This is the main section-->
+  <div class="main">
+    <div class="mainWrap">
+      <div class="leftSidebar"></div>
+      <div class="mainContent"></div>
+    </div>
+  </div>
+
+
+  <!-- This is the footer-->
+  <footer>
+    <div class="footerWrap">
+      <div class="footerContent"></div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Javascript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <!-- This is the js file link-->
+  <script defer src="./assets/js/script.js"></script>
+
 </body>
 </html>
