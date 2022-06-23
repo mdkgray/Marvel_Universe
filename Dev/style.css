@@ -10,3 +10,7 @@ body {
     background-color: black;
     color: white;
 }
+
+header {
+    background-color: rgb(158, 4, 4);
+}
