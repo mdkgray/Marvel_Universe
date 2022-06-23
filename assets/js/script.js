@@ -1,5 +1,5 @@
-var tableBody = document.getElementById('repo-table');
-var fetchButton = document.getElementById('fetch-button');
+var tableBody = document.getElementById('searchResults');
+var fetchButton = document.getElementById('searchButton');
 
 function getApi() {
   // fetch request gets a list of all the repos for the node.js organization
