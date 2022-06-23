@@ -1,0 +1,17 @@
+html {
+    background-color: black;
+    height: 100vh;
+}
+
+* {
+    font-family: 'Staatliches', cursive;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+header {
+    background-color: rgb(158, 4, 4);
+}
