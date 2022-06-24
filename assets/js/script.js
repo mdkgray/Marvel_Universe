@@ -10,22 +10,31 @@ function marvelAPICall () {
   var marvelPrvtAPIKey = "df27d4d6846ba6ac7b38d0f10f87f913ccdbb401";
   var userSearch = "thor"
   var hash =md5(timeStamp, marvelPrvtAPIKey, marvelPubAPIKey);
-  var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp&+"apikey="+marvelPubAPIKey&+"hash="+hash;
+  var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/comics?ts="+timeStamp&+"apikey="+marvelPubAPIKey&+"hash="+hash;
+
+  console.log(hash)
+  console.log(marvelAPIQueryURL)
 
   if(characterSelect) {
   var category = "characters"
-};
+  };
   if(movieSelect) {
   var category = "movies"
-};
+  };
   if(comicSelect) {
   var category = "comics"
-};
+  };
 
-fetch()
-
+  fetch(marvelAPIQueryURL)
+    .then(function(response) {
+    return response.json();
+    })
+      .then(function(data) {
+        console.log(data);
+      })
 }
 
+marvelAPICall();
 //       //Loop over the data to generate a table, each table row will have a link to the repo url
 //       for (var i = 0; i < data.length; i++) {
 //         // Creating elements, tablerow, tabledata, and anchor
