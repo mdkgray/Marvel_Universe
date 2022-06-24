@@ -9,10 +9,12 @@ function marvelAPICall () {
   var timeStamp = dayjs().unix();
   var marvelPrvtAPIKey = "df27d4d6846ba6ac7b38d0f10f87f913ccdbb401";
   var userSearch = "thor"
-  var hash =md5(timeStamp, marvelPrvtAPIKey, marvelPubAPIKey);
-  var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/comics?ts="+timeStamp&+"apikey="+marvelPubAPIKey&+"hash="+hash;
-  
+  var hashString = timeStamp+marvelPrvtAPIKey+marvelPubAPIKey
+  var hash =md5(hashString);
+  var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/comics?ts="+timeStamp+"&apikey=9994656a02f0ce9c84fd8dfa11d66b24&hash="+hash;
+
   console.log(timeStamp)
+  console.log(hashString)
   console.log(hash)
   console.log(marvelAPIQueryURL)
 

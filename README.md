@@ -45,7 +45,9 @@
 
 
 ## Credits
-
+ - https://github.com/iamkun/dayjs
+ - https://day.js.org/docs/en/display/unix-timestamp
+ 
 
 
 ## Acknowledgements
