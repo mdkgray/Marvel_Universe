@@ -6,12 +6,13 @@ var comicSelect = document.getElementById("comicInput").checked
 
 function marvelAPICall () {
   var marvelPubAPIKey = "9994656a02f0ce9c84fd8dfa11d66b24";
-  var timeStamp = 1656056679;
+  var timeStamp = dayjs().unix();
   var marvelPrvtAPIKey = "df27d4d6846ba6ac7b38d0f10f87f913ccdbb401";
   var userSearch = "thor"
   var hash =md5(timeStamp, marvelPrvtAPIKey, marvelPubAPIKey);
   var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/comics?ts="+timeStamp&+"apikey="+marvelPubAPIKey&+"hash="+hash;
-
+  
+  console.log(timeStamp)
   console.log(hash)
   console.log(marvelAPIQueryURL)
 
