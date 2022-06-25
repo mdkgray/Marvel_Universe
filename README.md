@@ -56,8 +56,7 @@
  - https://day.js.org/docs/en/display/unix-timestamp
  - https://day.js.org/docs/en/installation/browser
  - https://ourcodeworld.com/articles/read/1547/how-to-create-md5-hashes-in-javascript
- - https://www.npmjs.com/package/md5
- - https://requirejs.org/docs/start.html
+ - https://stackoverflow.com/questions/1655769/fastest-md5-implementation-in-javascript/60467595#60467595
 
 
 ## Acknowledgements
