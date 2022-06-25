@@ -1,52 +1,37 @@
 var tableBody = document.getElementById('searchResults');
 var fetchButton = document.getElementById('searchButton');
+var characterSelect = document.getElementById("characterInput").checked
+var movieSelect = document.getElementById("movieInput").checked
+var comicSelect = document.getElementById("comicInput").checked
 
-// 
-// Example Fetch, feel free to delete of modify
-// 
+// Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
+function marvelAPICall () {
+  var marvelPubAPIKey = "9994656a02f0ce9c84fd8dfa11d66b24";
+  var timeStamp = dayjs().unix();
+  var marvelPrvtAPIKey = "df27d4d6846ba6ac7b38d0f10f87f913ccdbb401";
+  var userSearch = "thor"
+  var hashString = timeStamp+marvelPrvtAPIKey+marvelPubAPIKey
+  var hash =md5(hashString);
+  var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/comics?ts="+timeStamp+"&apikey=9994656a02f0ce9c84fd8dfa11d66b24&hash="+hash;
 
-function getApi() {
-  // fetch request gets a list of all the repos for the node.js organization
-  var requestUrl = 'https://api.github.com/orgs/nodejs/repos';
+  console.log(marvelAPIQueryURL)
 
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
+  fetch(marvelAPIQueryURL)
+    .then(function(response) {
+    return response.json();
     })
-    .then(function (data) {
-      console.log(data)
-      //Loop over the data to generate a table, each table row will have a link to the repo url
-      for (var i = 0; i < data.length; i++) {
-        // Creating elements, tablerow, tabledata, and anchor
-        var createTableRow = document.createElement('tr');
-        var tableData = document.createElement('td');
-        var link = document.createElement('a');
-
-        // Setting the text of link and the href of the link
-        link.textContent = data[i].html_url;
-        link.href = data[i].html_url;
-
-        // Appending the link to the tabledata and then appending the tabledata to the tablerow
-        // The tablerow then gets appended to the tablebody
-        tableData.appendChild(link);
-        createTableRow.appendChild(tableData);
-        tableBody.appendChild(createTableRow);
-      }
-    });
+      .then(function(data) {
+        console.log(data);
+      })
 }
 
-fetchButton.addEventListener('click', getApi);
-// 
-// 
-// 
-
-
+marvelAPICall();
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
 // We may need to make a series of cards on the html and append the data to the cards
 // Either way, the search variable is "searchTerm", if the marvel api result that the user wants to see is set to "searchTerm", the two api's will talk. 
 
-function googleAPIfunction(){
+function googleAPIcall(){
 
 var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
 var searchTerm = "apple";
@@ -70,5 +55,5 @@ function hndlr(response) {
       document.createTextNode(item.htmlTitle)
   );
 }}
- };
-googleAPIfunction();
+};
+googleAPIcall();
