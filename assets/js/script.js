@@ -14,7 +14,6 @@ function marvelAPICall () {
   var hash =md5(hashString);
   var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/comics?ts="+timeStamp+"&apikey=9994656a02f0ce9c84fd8dfa11d66b24&hash="+hash;
 
-  console.log(timeStamp)
   console.log(marvelAPIQueryURL)
 
   fetch(marvelAPIQueryURL)
@@ -27,9 +26,6 @@ function marvelAPICall () {
 }
 
 marvelAPICall();
-
-
-// fetchButton.addEventListener('click', getApi);
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
 // We may need to make a series of cards on the html and append the data to the cards
