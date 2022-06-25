@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "blueimp-md5": "^2.19.0",
-    "dayjs": "^1.11.3",
-    "requirejs": "^2.3.6"
-  }
-}

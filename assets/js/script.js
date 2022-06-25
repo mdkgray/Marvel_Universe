@@ -14,6 +14,7 @@ function marvelAPICall () {
   var hash =md5(hashString);
   var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/comics?ts="+timeStamp+"&apikey=9994656a02f0ce9c84fd8dfa11d66b24&hash="+hash;
 
+  console.log(timeStamp)
   console.log(marvelAPIQueryURL)
 
   fetch(marvelAPIQueryURL)

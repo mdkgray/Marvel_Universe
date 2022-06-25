@@ -1,18 +1,21 @@
-# ToCodeProject1Demo
+# Marvel_Universe
 
 
-## Info / Description
+## Application Summary
 
 
 # Links
 
 
 
+## Inspiration
+
+
 # Features
 
 
 
-## Mock-Up
+## Mock-Up / Wireframe
 
 
 
@@ -39,6 +42,8 @@
 
 
 
+## Skills and Knowledge learnt
+
 
 ## Authors / Contributors
 
@@ -47,6 +52,10 @@
 ## Credits
  - https://github.com/iamkun/dayjs
  - https://day.js.org/docs/en/display/unix-timestamp
+ - https://ourcodeworld.com/articles/read/1547/how-to-create-md5-hashes-in-javascript
+ - https://www.npmjs.com/package/md5
+ - https://requirejs.org/docs/start.html
+
  
 
 
@@ -55,7 +64,10 @@
 
 
 
-## Licence ?
+## Badges
+[![](https://data.jsdelivr.com/v1/package/npm/dayjs/badge)](https://www.jsdelivr.com/package/npm/dayjs)
+
+## Licence?
 
 
 
