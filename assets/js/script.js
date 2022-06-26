@@ -1,4 +1,4 @@
-var tableBody = document.getElementById("searchResults");
+var marvelResults = document.getElementById("searchResults");
 var searchButton = document.getElementById("searchButton");
 var characterSelect = document.getElementById("characterInput")
 var movieSelect = document.getElementById("movieInput")
@@ -58,16 +58,17 @@ searchButton.addEventListener("click", function (event) {
   if(characterSelect.checked) {
     var category = "characters"
     marvelAPICall();
-  } else if(movieSelect.checked) {
+  }; 
+  if(movieSelect.checked) {
       var category = "movies"
       marvelAPICall();
-  } else if(comicSelect.checked) {
+  }; 
+  if(comicSelect.checked) {
       var category = "comics"
       marvelAPICall();
   };
 // Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
   function marvelAPICall () {
-    var marvelAPIKey = "9994656a02f0ce9c84fd8dfa11d66b24";
     var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash;
 
     console.log(marvelAPIQueryURL)
@@ -78,42 +79,63 @@ searchButton.addEventListener("click", function (event) {
       })
       .then(function(data) {
         console.log(data);
-      })
-  }
+        var marvelAPIData = data.data.results;
+        console.log(marvelAPIData);
+        if(category=="characters") {
+          function characterDisplay (){ 
+            for (var i = 0; i < marvelAPIData.length; i++) {
+              var marvelResultName = document.createElement("li");
+              var resultLink = document.createElement("a");
+              marvelResultName.classList.add("marvel-result-name");
+              marvelResultName.textContent = marvelAPIData[i].name;
+              marvelResultName.append(resultLink);
+              marvelResults.append(marvelResultName);
+            };
+          }; characterDisplay();
 
+        } else if(category=="comics") { 
+            function comicDisplay (){ 
+              for (var i = 0; i < marvelAPIData.length; i++) {
+                var marvelResultName = document.createElement("li");
+                var resultLink = document.createElement("a");
+                marvelResultName.classList.add("marvel-result-name");
+                marvelResultName.textContent = marvelAPIData[i].title;
+                marvelResultName.append(resultLink);
+                marvelResults.append(marvelResultName);
+              };
+            }; comicDisplay();
+          };
+      });
+  };
 });
-
-
-
-
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
 // We may need to make a series of cards on the html and append the data to the cards
 // Either way, the search variable is "searchTerm", if the marvel api result that the user wants to see is set to "searchTerm", the two api's will talk. 
 
-// function googleAPIcall(){
+function googleAPIcall(){
 
-// var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
-// var searchTerm = "apple";
-// var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm;
-// // &callback=hndlr"
+var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
+var searchTerm = "apple";
+var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm;
+// &callback=hndlr"
 
 
-// fetch(queryURL)
-//   .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data)})
+fetch(queryURL)
+  .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data)})
 
-// function hndlr(response) {
-//   for (var i = 0; i < response.items.length; i++) {
-//     var item = response.items[i];
-//     // Make sure HTML in item.htmlTitle is escaped.
-//     document.getElementById("content").append(
-//       document.createElement("br"),
-//       document.createTextNode(item.htmlTitle)
-//   );
-// }}
-// };
-// googleAPIcall();
+function hndlr(response) {
+  for (var i = 0; i < response.items.length; i++) {
+    var item = response.items[i];
+    // Make sure HTML in item.htmlTitle is escaped.
+    document.getElementById("content").append(
+      document.createElement("br"),
+      document.createTextNode(item.htmlTitle)
+  );
+}}
+};
+googleAPIcall();

@@ -36,41 +36,41 @@
 
   <!-- This is the option section-->
   <div class="container px-4 vstack gap-3 m-5">
-        <div class="row row-cols-2 gx-5">
-            <div class="sectionOptions col-4">
-                <h1 class="text-center">Select What To Include</h1>
-                <div class="searchOptions d-grid gap-2 ">
-                    <div class="form-check form-switch">
-                        <input id ="characterInput" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Character</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input id ="movieInput" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Movie</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input id ="comicInput" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Comic</label>
-                    </div>
-                    <button id="searchButton" type="button"class="searchButton btn btn-primary" type="button">Search</button>
+    <div class="row row-cols-2 gx-5">
+        <div class="sectionOptions col-4">
+            <h1 class="text-center">Select What To Include</h1>
+            <div class="searchOptions d-grid gap-2 ">
+                <div class="form-check form-switch">
+                    <input id ="characterInput" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" >
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Character</label>
                 </div>
-            </div>
-            <!-- Search results section -->
-            <div class="main col-8 ml-5">
-                <div class="resultsSection">
-                  <h2>Search Results for:<span class="searchParameters"></span></h2>
-                  <table id="searchResults"></table>
-                  <table id="content"></table>
-  
+                <div class="form-check form-switch">
+                    <input id ="movieInput" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Movie</label>
                 </div>
+                <div class="form-check form-switch">
+                    <input id ="comicInput" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Comic</label>
+                </div>
+                <button id="searchButton" type="button"class="searchButton btn btn-primary" type="button">Search</button>
             </div>
-            <!-- Search history section -->
-            <div class="sectionOptions col-4 mt-5 text-center">
-                <h2>Search History</h2>
-                <ul id="searchHistory" class="searchHistory"></ul>
+        </div>
+        <!-- Search results section -->
+        <div class="main col-8 ml-5">
+            <div class="resultsSection">
+              <h2>Search Results for:<span class="searchParameters"></span></h2>
+              <ul id="searchResults"></ul>
+              <div id="content"></div>
+
             </div>
-        </div>       
-    </div>
+        </div>
+        <!-- Search history section -->
+        <div class="sectionOptions col-4 mt-5 text-center">
+            <h2>Search History</h2>
+            <ul id="searchHistory" class="searchHistory"></ul>
+        </div>
+    </div>       
+</div>
 
   <!-- This is the footer-->
   <footer>
