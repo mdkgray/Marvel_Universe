@@ -6,6 +6,7 @@ var comicSelect = document.getElementById("comicInput");
 var nextButton = document.querySelector(".nextBttn");
 var marvelResults = document.querySelector(".marvel-result-name");
 var searchResultsBox = document.getElementById("searchResults");
+var searchParameters = document.querySelector(".searchParameters");
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -62,10 +63,6 @@ searchButton.addEventListener("click", function (event) {
     var category = "characters";
     marvelAPICall();
   }; 
-  // if(movieSelect.checked) { // This won't work as we there isn't a movie category.
-  //     var category = "movies"
-  //     marvelAPICall();
-  // }; 
   if(comicSelect.checked) {
       var category = "comics";
       marvelAPICall();
@@ -95,6 +92,7 @@ searchButton.addEventListener("click", function (event) {
         console.log(marvelAPIData);
         if(category=="characters") {
           function characterDisplay (){ 
+            searchParameters.innerHTML = " All characters";
             for (var i = 0; i < marvelAPIData.length; i++) {
               var marvelResultName = document.createElement("li");
               var resultLink = document.createElement("a");
@@ -110,15 +108,16 @@ searchButton.addEventListener("click", function (event) {
 
         } else if(category=="comics") { 
             function comicDisplay (){ 
+              searchParameters.innerHTML = " All comics"
               for (var i = 0; i < marvelAPIData.length; i++) {
                 var marvelResultName = document.createElement("li");
                 var resultLink = document.createElement("a");
-                let dataName = (marvelAPIData[i].name);
+                let dataName = (marvelAPIData[i].title);
                 marvelResultName.classList.add("marvel-result-name");
                 marvelResultName.textContent = marvelAPIData[i].title;
-                marvelResultName.setAttribute("data-comicName",dataName);
+                marvelResultName.setAttribute("data-charName",dataName);
                 marvelResultName.append(resultLink);
-                marvelResults.append(marvelResultName);
+                marvelResultContainer.append(marvelResultName);
                 marvelResultName.addEventListener("click", callGoogle)
               };
             }; comicDisplay();
@@ -130,29 +129,36 @@ searchButton.addEventListener("click", function (event) {
 
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
-  var searchTerm = this.getAttribute("data-charName",)
+
+  var searchTerm = this.getAttribute("data-charName")
+  searchParameters.innerHTML = " " + searchTerm;
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
   function googleAPIcall(){
   var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
   var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"&searchType=image";
-  // &imgDominantColor={imgDominantColor?}
+  // &callback=hndlr"
 
   fetch(queryURL)
     .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        console.log(data)
-        for(let i=0; i<data.length; i++){
-        let imageElement = "<img src='' alt=''></img>"
-        imThumbEl = data.items[i].image.thumbnailLink;
-        searchResultsBox.innerHTML= imageElement;
-        searchResultsBox.src = imThumbEl
-        
-        }
-      })  
-  };
+        console.log(data);
 
-googleAPIcall();
-};
+        for(let i=0; i<2; i++){
+          let imageElement = "<img id='imgThumbnailID' src=''></img>";
+          let imgThumbLink = data.items[i].image.thumbnailLink;
+          let imgLink = data.items[i].image.link;
+          // Now to append them to the body, so far its only appending one
+          searchResultsBox.innerHTML = imageElement;
+          searchResultsBox.setAttribute("data-imgEL", imgLink);
+          document.getElementById("imgThumbnailID").src = imgThumbLink;
+    
+  
+          }
+        })  
+    };
+  
+  googleAPIcall();
+  };
