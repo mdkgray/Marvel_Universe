@@ -1,9 +1,10 @@
-var marvelResults = document.getElementById("searchResults");
+var marvelResultContainer = document.getElementById("searchResults");
 var searchButton = document.getElementById("searchButton");
 var characterSelect = document.getElementById("characterInput")
 var movieSelect = document.getElementById("movieInput")
 var comicSelect = document.getElementById("comicInput")
 var nextButton = document.querySelector(".nextBttn")
+var marvelResults = document.querySelector(".marvel-result-name")
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -71,12 +72,15 @@ searchButton.addEventListener("click", function (event) {
 // Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
   function marvelAPICall () {
     var limit = 20
-    var offset = limit
+    var offset = 20
+    var totalResultCount
     var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash+"&limit="+limit+"&offset="+offset;
-
+    // if offset + results goes above total acount then last page and hide next button.
     console.log(marvelAPIQueryURL)
     
     nextButton.addEventListener("click", function(event) {
+      marvelResultContainer =""
+      offsetCount = offsetCount+limit
       marvelAPICall();
     });
 
@@ -93,10 +97,13 @@ searchButton.addEventListener("click", function (event) {
             for (var i = 0; i < marvelAPIData.length; i++) {
               var marvelResultName = document.createElement("li");
               var resultLink = document.createElement("a");
+              let dataName = (marvelAPIData[i].name);
               marvelResultName.classList.add("marvel-result-name");
               marvelResultName.textContent = marvelAPIData[i].name;
+              marvelResultName.setAttribute("data-charName",dataName);
               marvelResultName.append(resultLink);
-              marvelResults.append(marvelResultName);
+              marvelResultContainer.append(marvelResultName);
+              marvelResultName.addEventListener("click", callGoogle);
             };
           }; characterDisplay();
 
@@ -105,10 +112,13 @@ searchButton.addEventListener("click", function (event) {
               for (var i = 0; i < marvelAPIData.length; i++) {
                 var marvelResultName = document.createElement("li");
                 var resultLink = document.createElement("a");
+                let dataName = (marvelAPIData[i].name);
                 marvelResultName.classList.add("marvel-result-name");
                 marvelResultName.textContent = marvelAPIData[i].title;
+                marvelResultName.setAttribute("data-comicName",dataName);
                 marvelResultName.append(resultLink);
                 marvelResults.append(marvelResultName);
+                marvelResultName.addEventListener("click", callGoogle)
               };
             }; comicDisplay();
           };
@@ -117,33 +127,33 @@ searchButton.addEventListener("click", function (event) {
   nextButton.setAttribute("class", "nextBttn show");
 });
 
+// Function to Call Google API with Marvel search Term
+function callGoogle() {
+  var searchTerm = this.getAttribute("data-charName",)
+
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
-// We may need to make a series of cards on the html and append the data to the cards
-// Either way, the search variable is "searchTerm", if the marvel api result that the user wants to see is set to "searchTerm", the two api's will talk. 
+  function googleAPIcall(){
+  var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
+  var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm;
+  // &callback=hndlr"
 
-function googleAPIcall(){
+  fetch(queryURL)
+    .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data)})
 
-var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
-var searchTerm = "apple";
-var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm;
-// &callback=hndlr"
+  function hndlr(response) {
+    for (var i = 0; i < response.items.length; i++) {
+      var item = response.items[i];
+      // Make sure HTML in item.htmlTitle is escaped.
+      document.getElementById("content").append(
+        document.createElement("br"),
+        document.createTextNode(item.htmlTitle)
+    );
+  }}
+  };
 
-
-fetch(queryURL)
-  .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data)})
-
-function hndlr(response) {
-  for (var i = 0; i < response.items.length; i++) {
-    var item = response.items[i];
-    // Make sure HTML in item.htmlTitle is escaped.
-    document.getElementById("content").append(
-      document.createElement("br"),
-      document.createTextNode(item.htmlTitle)
-  );
-}}
-};
 googleAPIcall();
+};
