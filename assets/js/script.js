@@ -93,6 +93,7 @@ searchButton.addEventListener("click", function (event) {
         if(category=="characters") {
           function characterDisplay (){ 
             searchParameters.innerHTML = " All characters";
+            searchResultsBox.innerHTML = "";
             for (var i = 0; i < marvelAPIData.length; i++) {
               var marvelResultName = document.createElement("li");
               var resultLink = document.createElement("a");
@@ -108,7 +109,8 @@ searchButton.addEventListener("click", function (event) {
 
         } else if(category=="comics") { 
             function comicDisplay (){ 
-              searchParameters.innerHTML = " All comics"
+              searchParameters.innerHTML = " All comics";
+              searchResultsBox.innerHTML = "";
               for (var i = 0; i < marvelAPIData.length; i++) {
                 var marvelResultName = document.createElement("li");
                 var resultLink = document.createElement("a");
