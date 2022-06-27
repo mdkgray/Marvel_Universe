@@ -1,54 +1,44 @@
-# Marvel_Universe
+# The Marvellous Marvel Universe
 
+### By Jason Steer, Chris Wallace, Andrei Bondaret and Mackenzie Gray
 
-## Application Summary
+## Technologies Used
 
+- HTML
+- CSS
+- JavaScript
 
+## Description 
 
-# Links
+The motivation for this project was to develop an application using the Marvel API and Google Images API, which could than be used by a Marvel enthusiast to search images of their favourite characters. 
 
+## Outline of codebase writing
+HTML:
+- 
 
+CSS:
+- 
 
-## Inspiration
+JavaScript:
+- 
 
+## Website URL
+[Click here to view website](https://mdkgray.github.io/marvel_universe/)
 
-
-# Features
+## Screenshots
 
 
 
 ## Mock-Up / Wireframe
 
 
-
-## Requirements 
-
-
-
-## Installation
-
-
-
-
 ## How to use
-
-
 
 
 ## Project Status
 
 
-
-
-## Faq
-
-
-
 ## Skills and Knowledge learnt
-
-
-## Authors / Contributors
-
 
 
 ## Credits
@@ -67,7 +57,6 @@
 ## Badges
 [![](https://data.jsdelivr.com/v1/package/npm/dayjs/badge)](https://www.jsdelivr.com/package/npm/dayjs)
 
-## Licence?
 
 
 
