@@ -127,7 +127,7 @@ searchButton.addEventListener("click", function (event) {
   nextButton.setAttribute("class", "nextBttn show");
 });
 
-
+// Function to Call Google API with Marvel search Term
 function callGoogle() {
   var searchTerm = this.getAttribute("data-charName",)
 
