@@ -3,6 +3,7 @@ var searchButton = document.getElementById("searchButton");
 var characterSelect = document.getElementById("characterInput")
 var movieSelect = document.getElementById("movieInput")
 var comicSelect = document.getElementById("comicInput")
+var nextButton = document.querySelector(".nextBttn")
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -56,22 +57,28 @@ function md5(hashString) {
 // <!--Code to implement dynamic select to API Call-->
 searchButton.addEventListener("click", function (event) {
   if(characterSelect.checked) {
-    var category = "characters"
+    var category = "characters";
     marvelAPICall();
   }; 
-  if(movieSelect.checked) {
+  if(movieSelect.checked) { // This won't work as we there isn't a movie category.
       var category = "movies"
       marvelAPICall();
   }; 
   if(comicSelect.checked) {
-      var category = "comics"
+      var category = "comics";
       marvelAPICall();
   };
 // Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
   function marvelAPICall () {
-    var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash;
+    var limit = 20
+    var offset = limit
+    var marvelAPIQueryURL = "http://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash+"&limit="+limit+"&offset="+offset;
 
     console.log(marvelAPIQueryURL)
+    
+    nextButton.addEventListener("click", function(event) {
+      marvelAPICall();
+    });
 
     fetch(marvelAPIQueryURL)
       .then(function(response) {
@@ -107,6 +114,7 @@ searchButton.addEventListener("click", function (event) {
           };
       });
   };
+  nextButton.setAttribute("class", "nextBttn show");
 });
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
