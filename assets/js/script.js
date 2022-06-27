@@ -1,10 +1,11 @@
 var marvelResultContainer = document.getElementById("searchResults");
 var searchButton = document.getElementById("searchButton");
-var characterSelect = document.getElementById("characterInput")
-var movieSelect = document.getElementById("movieInput")
-var comicSelect = document.getElementById("comicInput")
-var nextButton = document.querySelector(".nextBttn")
-var marvelResults = document.querySelector(".marvel-result-name")
+var characterSelect = document.getElementById("characterInput");
+var movieSelect = document.getElementById("movieInput");
+var comicSelect = document.getElementById("comicInput");
+var nextButton = document.querySelector(".nextBttn");
+var marvelResults = document.querySelector(".marvel-result-name");
+var searchResultsBox = document.getElementById("searchResults");
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -136,7 +137,6 @@ function callGoogle() {
   var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
   var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"&searchType=image";
   // &imgDominantColor={imgDominantColor?}
-  // &callback=hndlr"
 
   fetch(queryURL)
     .then(function (response) {
@@ -144,20 +144,14 @@ function callGoogle() {
       })
       .then(function (data) {
         console.log(data)
-          console.log(data.items[0].image.thumbnailLink);
-      })
-      
-
-
-  // function hndlr(response) {
-  //   for (var i = 0; i < response.items.length; i++) {
-  //     var item = response.items[i];
-  //     // Make sure HTML in item.htmlTitle is escaped.
-  //     document.getElementById("content").append(
-  //       document.createElement("br"),
-  //       document.createTextNode(item.htmlTitle)
-  //   );
-  // }}
+        for(let i=0; i<data.length; i++){
+        let imageElement = "<img src='' alt=''></img>"
+        imThumbEl = data.items[i].image.thumbnailLink;
+        searchResultsBox.innerHTML= imageElement;
+        searchResultsBox.src = imThumbEl
+        
+        }
+      })  
   };
 
 googleAPIcall();
