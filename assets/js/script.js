@@ -91,12 +91,16 @@ searchButton.addEventListener("click", function (event) {
         if(category=="characters") {
           function characterDisplay (){ 
             for (var i = 0; i < marvelAPIData.length; i++) {
+            
               var marvelResultName = document.createElement("li");
               var resultLink = document.createElement("a");
-              marvelResultName.classList.add("marvel-result-name");
               marvelResultName.textContent = marvelAPIData[i].name;
+              let dataName = marvelResultName.textContent
+              marvelResultName.classList.add("marvel-result-name");
+              setAttribute("data-charname"= dataName);
               marvelResultName.append(resultLink);
               marvelResults.append(marvelResultName);
+
             };
           }; characterDisplay();
 
