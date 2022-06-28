@@ -11,6 +11,8 @@ var searchHistoryArray = [];
 
 var searchResultsBox = document.getElementById("searchResults");
 var searchParameters = document.querySelector(".searchParameters");
+
+var category ="";
 // var searchTerm = [];
 
 // //Marvel API Hash
@@ -65,11 +67,11 @@ function md5(hashString) {
 // <!--Code to implement dynamic select to API Call-->
 searchButton.addEventListener("click", function (event) {
   if(characterSelect.checked) {
-    var category = "characters";
+    category = "characters";
     marvelAPICall();
   }; 
   if(comicSelect.checked) {
-      var category = "comics";
+      category = "comics";
       marvelAPICall();
   };
 // Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
@@ -92,9 +94,7 @@ searchButton.addEventListener("click", function (event) {
       return response.json();
       })
       .then(function(data) {
-        console.log(data);
         var marvelAPIData = data.data.results;
-        console.log(marvelAPIData);
         if(category=="characters") {
           function characterDisplay (){ 
             searchParameters.innerHTML = " All characters";
@@ -149,7 +149,6 @@ function callGoogle() {
   function googleAPIcall(){
   var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
   var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"&searchType=image";
-  // &callback=hndlr"
 
   fetch(queryURL)
     .then(function (response) {
@@ -158,21 +157,44 @@ function callGoogle() {
       .then(function (data) {
         console.log(data);
 
+        if(category=="characters") {;
         var googleAPIData = data.items;
         console.log(googleAPIData);
-
         searchResultsBox.innerHTML = "";
 
         for(let i = 0; i < googleAPIData.length; i++) {
           let imageElement = document.createElement("img");
           imageElement.classList.add("imageEl");
           let imgThumbLink = data.items[i].image.thumbnailLink;
-          let imgLink = data.items[i].image.link;
           searchResultsBox.appendChild(imageElement);
-          searchResultsBox.setAttribute("data-imgEL", imgLink);
-          imageElement.setAttribute("src", imgThumbLink);  
-          }
-        })  
+          imageElement.setAttribute("src", imgThumbLink); 
+          // searchResultsBox.setAttribute("data-imgEL", imgLink);
+          };
+
+        } else if(category=="comics") {
+          var googleAPIData = data.items;
+          console.log(googleAPIData);
+          searchResultsBox.innerHTML = "";
+  
+          for(let i = 0; i < googleAPIData.length; i++) {
+            if (data.items[i].hasOwnProperty("image")) {
+              let imageElement = document.createElement("img");
+              imageElement.classList.add("imageEl");
+              let imgThumbLink = data.items[i].image.thumbnailLink;
+              imageElement.setAttribute("src", imgThumbLink);
+              searchResultsBox.appendChild(imageElement);
+              // searchResultsBox.setAttribute("data-imgEL", imgLink);
+            } else {
+              let imageElement = document.createElement("img");
+              imageElement.classList.add("imageEl");
+              let imgThumbLink = data.items[i].pagemap.cse_thumbnail[0].src;
+              imageElement.setAttribute("src", imgThumbLink);
+              searchResultsBox.appendChild(imageElement);
+              // searchResultsBox.setAttribute("data-imgEL", imgLink);
+            }; 
+          };
+        };
+      });  
     };  
   googleAPIcall();
 };
