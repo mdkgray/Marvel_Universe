@@ -47,6 +47,7 @@ JavaScript:
  - https://day.js.org/docs/en/installation/browser
  - https://ourcodeworld.com/articles/read/1547/how-to-create-md5-hashes-in-javascript
  - https://stackoverflow.com/questions/1655769/fastest-md5-implementation-in-javascript/60467595#60467595
+ - https://www.javascripttutorial.net/object/javascript-check-if-property-exists/
 
 
 ## Acknowledgements
