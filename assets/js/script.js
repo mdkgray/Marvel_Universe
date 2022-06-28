@@ -1,10 +1,13 @@
 var marvelResultContainer = document.getElementById("searchResults");
 var searchButton = document.getElementById("searchButton");
-var characterSelect = document.getElementById("characterInput")
-var movieSelect = document.getElementById("movieInput")
-var comicSelect = document.getElementById("comicInput")
-var nextButton = document.querySelector(".nextBttn")
-var marvelResults = document.querySelector(".marvel-result-name")
+var characterSelect = document.getElementById("characterInput");
+var movieSelect = document.getElementById("movieInput");
+var comicSelect = document.getElementById("comicInput");
+var nextButton = document.querySelector(".nextBttn");
+var marvelResults = document.querySelector(".marvel-result-name");
+
+var searchHistoryDisplay = document.querySelector(".search-history");
+var searchHistoryArray = []; 
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -61,10 +64,10 @@ searchButton.addEventListener("click", function (event) {
     var category = "characters";
     marvelAPICall();
   }; 
-  if(movieSelect.checked) { // This won't work as we there isn't a movie category.
-      var category = "movies"
-      marvelAPICall();
-  }; 
+//   if(movieSelect.checked) { // This won't work as we there isn't a movie category.
+//       var category = "movies"
+//       marvelAPICall();
+//   }; 
   if(comicSelect.checked) {
       var category = "comics";
       marvelAPICall();
@@ -127,15 +130,38 @@ searchButton.addEventListener("click", function (event) {
   nextButton.setAttribute("class", "nextBttn show");
 });
 
+
+
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
   var searchTerm = this.getAttribute("data-charName",)
 
+    // Local storage
+    function storeHistory() {
+        searchHistoryArray.push(searchTerm);
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
+        console.log(searchHistoryArray);
+        displaySearchHistory();
+    }
+
+    function displaySearchHistory() {
+        for (var i = 0; i < searchHistoryArray.length; i++);
+        var searchedTermsArray = [];
+        var historicalSearchItem = document.createElement("li");
+        historicalSearchItem.textContent = searchHistoryArray[i];
+        searchHistoryDisplay.appendChild(historicalSearchItem);
+    }
+
+    // var searchedTermsArray = JSON.parse(localStorage.getItem("userScore"));
+
+    storeHistory();
+
+
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
   function googleAPIcall(){
-  var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
-  var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm;
-  // &callback=hndlr"
+    var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
+    var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm;
+    // &callback=hndlr"
 
   fetch(queryURL)
     .then(function (response) {
