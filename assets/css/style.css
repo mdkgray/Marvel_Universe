@@ -27,8 +27,10 @@ header {
     left: 0;
     bottom: 0;
     width: 100%;
+    height: 30px;
     color: white;
     text-align: center;
+    background-color: black;
 }
 
 .hide {
@@ -37,4 +39,11 @@ header {
 
 .show {
     display: block;
+}
+
+.nextBttn{
+    margin-bottom: -24px;
+}
+.text-center{
+    justify-content: center;
 }

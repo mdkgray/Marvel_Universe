@@ -140,25 +140,25 @@ function callGoogle() {
   var searchTerm = this.getAttribute("data-charName")
   searchParameters.innerHTML = " " + searchTerm;
 
-    // Local storage
-    function storeHistory() {
-        searchHistoryArray.push(searchTerm);
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
-        console.log(searchHistoryArray);
-        displaySearchHistory();
-    }
+    // // Local storage
+    // function storeHistory() {
+    //     searchHistoryArray.push(searchTerm);
+    //     localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
+    //     console.log(searchHistoryArray);
+    //     displaySearchHistory();
+    // }
 
-    function displaySearchHistory() {
-        for (var i = 0; i < searchHistoryArray.length; i++);
-        var searchedTermsArray = [];
-        var historicalSearchItem = document.createElement("li");
-        historicalSearchItem.textContent = searchHistoryArray[i];
-        searchHistoryDisplay.appendChild(historicalSearchItem);
-    }
+    // function displaySearchHistory() {
+    //     for (var i = 0; i < searchHistoryArray.length; i++);
+    //     var searchedTermsArray = [];
+    //     var historicalSearchItem = document.createElement("li");
+    //     historicalSearchItem.textContent = searchHistoryArray[i];
+    //     searchHistoryDisplay.appendChild(historicalSearchItem);
+    // }
 
-    // var searchedTermsArray = JSON.parse(localStorage.getItem("userScore"));
+    // // var searchedTermsArray = JSON.parse(localStorage.getItem("userScore"));
 
-    storeHistory();
+    // storeHistory();
 
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
