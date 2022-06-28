@@ -158,14 +158,19 @@ function callGoogle() {
       .then(function (data) {
         console.log(data);
 
-        for(let i=0; i<2; i++){
-          let imageElement = "<img id='imgThumbnailID' src=''></img>";
+        var googleAPIData = data.items;
+        console.log(googleAPIData);
+
+        searchResultsBox.innerHTML = "";
+
+        for(let i = 0; i < googleAPIData.length; i++) {
+          let imageElement = document.createElement("img");
+          imageElement.classList.add("imageEl");
           let imgThumbLink = data.items[i].image.thumbnailLink;
           let imgLink = data.items[i].image.link;
-          // Now to append them to the body, so far its only appending one
-          searchResultsBox.innerHTML = imageElement;
+          searchResultsBox.appendChild(imageElement);
           searchResultsBox.setAttribute("data-imgEL", imgLink);
-          document.getElementById("imgThumbnailID").src = imgThumbLink;  
+          imageElement.setAttribute("src", imgThumbLink);  
           }
         })  
     };  
