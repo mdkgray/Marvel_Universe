@@ -6,10 +6,12 @@ var comicSelect = document.getElementById("comicInput");
 var nextButton = document.querySelector(".nextBttn");
 var marvelResults = document.querySelector(".marvel-result-name");
 
-var searchHistoryDisplay = document.querySelector(".search-history");
-var searchHistoryArray = []; 
+var searchHistoryDisplay = document.querySelector("#searchHistory");
+var searchHistoryArray = [];
+
 var searchResultsBox = document.getElementById("searchResults");
 var searchParameters = document.querySelector(".searchParameters");
+// var searchTerm = [];
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -137,29 +139,11 @@ searchButton.addEventListener("click", function (event) {
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
 
-  var searchTerm = this.getAttribute("data-charName")
-  searchParameters.innerHTML = " " + searchTerm;
+    var searchTerm = this.getAttribute("data-charName")
+    searchParameters.innerHTML = " " + searchTerm;
 
-    // Local storage
-    function storeHistory() {
-        searchHistoryArray.push(searchTerm);
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
-        console.log(searchHistoryArray);
-        displaySearchHistory();
-    }
-
-    function displaySearchHistory() {
-        for (var i = 0; i < searchHistoryArray.length; i++);
-        var searchedTermsArray = [];
-        var historicalSearchItem = document.createElement("li");
-        historicalSearchItem.textContent = searchHistoryArray[i];
-        searchHistoryDisplay.appendChild(historicalSearchItem);
-    }
-
-    // var searchedTermsArray = JSON.parse(localStorage.getItem("userScore"));
-
-    storeHistory();
-
+    logHistory(searchTerm);
+    displaySearchHistory();
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
   function googleAPIcall(){
@@ -181,12 +165,27 @@ function callGoogle() {
           // Now to append them to the body, so far its only appending one
           searchResultsBox.innerHTML = imageElement;
           searchResultsBox.setAttribute("data-imgEL", imgLink);
-          document.getElementById("imgThumbnailID").src = imgThumbLink;
-    
-  
+          document.getElementById("imgThumbnailID").src = imgThumbLink;  
           }
         })  
-    };
-  
+    };  
   googleAPIcall();
-  };
+};
+
+// Log search history to local storage
+function logHistory(searchTerm) {
+    searchHistoryArray.push(searchTerm);
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
+    console.log(searchHistoryArray);
+};
+
+// Display search history to page 
+function displaySearchHistory() {
+    var searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory"));
+    searchHistoryDisplay.innerHTML = ""
+    for (var i = 0; i < searchHistoryArray.length; i++) {
+        var searchHistoryItem = document.createElement("li");
+        searchHistoryItem.textContent = searchHistoryArray[i];
+        searchHistoryDisplay.appendChild(searchHistoryItem);
+    }
+};
