@@ -5,6 +5,9 @@ var movieSelect = document.getElementById("movieInput");
 var comicSelect = document.getElementById("comicInput");
 var nextButton = document.querySelector(".nextBttn");
 var marvelResults = document.querySelector(".marvel-result-name");
+
+var searchHistoryDisplay = document.querySelector(".search-history");
+var searchHistoryArray = []; 
 var searchResultsBox = document.getElementById("searchResults");
 var searchParameters = document.querySelector(".searchParameters");
 
@@ -129,11 +132,34 @@ searchButton.addEventListener("click", function (event) {
   nextButton.setAttribute("class", "nextBttn show");
 });
 
+
+
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
 
   var searchTerm = this.getAttribute("data-charName")
   searchParameters.innerHTML = " " + searchTerm;
+
+    // Local storage
+    function storeHistory() {
+        searchHistoryArray.push(searchTerm);
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
+        console.log(searchHistoryArray);
+        displaySearchHistory();
+    }
+
+    function displaySearchHistory() {
+        for (var i = 0; i < searchHistoryArray.length; i++);
+        var searchedTermsArray = [];
+        var historicalSearchItem = document.createElement("li");
+        historicalSearchItem.textContent = searchHistoryArray[i];
+        searchHistoryDisplay.appendChild(historicalSearchItem);
+    }
+
+    // var searchedTermsArray = JSON.parse(localStorage.getItem("userScore"));
+
+    storeHistory();
+
 
 // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
   function googleAPIcall(){
