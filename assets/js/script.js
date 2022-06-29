@@ -13,7 +13,6 @@ var searchResultsBox = document.getElementById("searchResults");
 var searchParameters = document.querySelector(".searchParameters");
 
 var category ="";
-// var searchTerm = [];
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -134,8 +133,6 @@ searchButton.addEventListener("click", function (event) {
   nextButton.setAttribute("class", "nextBttn show");
 });
 
-
-
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
 
@@ -163,11 +160,16 @@ function callGoogle() {
         searchResultsBox.innerHTML = "";
 
         for(let i = 0; i < googleAPIData.length; i++) {
+          var resultCard = document.createElement("div");
+          resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
+
           let imageElement = document.createElement("img");
           imageElement.classList.add("imageEl");
           let imgThumbLink = data.items[i].image.thumbnailLink;
-          searchResultsBox.appendChild(imageElement);
+
           imageElement.setAttribute("src", imgThumbLink); 
+          resultCard.appendChild(imageElement);
+          searchResultsBox.appendChild(resultCard);
           // searchResultsBox.setAttribute("data-imgEL", imgLink);
           };
 
@@ -178,18 +180,28 @@ function callGoogle() {
   
           for(let i = 0; i < googleAPIData.length; i++) {
             if (data.items[i].hasOwnProperty("image")) {
+              var resultCard = document.createElement("div");
+              resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
+
               let imageElement = document.createElement("img");
               imageElement.classList.add("imageEl");
               let imgThumbLink = data.items[i].image.thumbnailLink;
+
               imageElement.setAttribute("src", imgThumbLink);
-              searchResultsBox.appendChild(imageElement);
+              resultCard.appendChild(imageElement);
+              searchResultsBox.appendChild(resultCard);
               // searchResultsBox.setAttribute("data-imgEL", imgLink);
             } else {
+              var resultCard = document.createElement("div");
+              resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
+
               let imageElement = document.createElement("img");
               imageElement.classList.add("imageEl");
               let imgThumbLink = data.items[i].pagemap.cse_thumbnail[0].src;
+
               imageElement.setAttribute("src", imgThumbLink);
-              searchResultsBox.appendChild(imageElement);
+              resultCard.appendChild(imageElement);
+              searchResultsBox.appendChild(resultCard);
               // searchResultsBox.setAttribute("data-imgEL", imgLink);
             }; 
           };

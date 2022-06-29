@@ -47,3 +47,13 @@ header {
 .text-center{
     justify-content: center;
 }
+
+.imageEl {
+    height:auto;
+    width: fit-content;
+}
+
+.card {
+    width: auto;
+    height: auto;
+}
