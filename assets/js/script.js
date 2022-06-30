@@ -3,6 +3,7 @@ var searchButton = document.getElementById("searchButton");
 var characterSelect = document.getElementById("characterInput");
 var comicSelect = document.getElementById("comicInput");
 var nextButton = document.querySelector(".nextBttn");
+var prevButton = document.querySelector(".prevBttn");
 var marvelResults = document.querySelector(".marvel-result-name");
 
 var searchHistoryDisplay = document.querySelector("#searchHistory");
@@ -13,6 +14,10 @@ var searchParameters = document.querySelector(".searchParameters");
 var searchResultsText = document.querySelector(".searchResultsText");
 
 var category ="";
+var limit = 20;
+var offset = 0;
+var offsetCount = 0;
+var totalCount;
 
 // //Marvel API Hash
 var timeStamp = dayjs().unix();
@@ -65,82 +70,95 @@ function md5(hashString) {
 
 // <!--Code to implement dynamic select to API Call-->
 searchButton.addEventListener("click", function (event) {
-  if(characterSelect.checked) {
-    category = "characters";
-    marvelAPICall();
-  }; 
-  if(comicSelect.checked) {
-      category = "comics";
-      marvelAPICall();
-  };
-// Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
-  function marvelAPICall () {
-    var limit = 20
-    var offset = 20
-    var totalResultCount
-    var marvelAPIQueryURL = "https://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash+"&limit="+limit+"&offset="+offset;
-    // if offset + results goes above total acount then last page and hide next button.
-    console.log(marvelAPIQueryURL)
-    
-    nextButton.addEventListener("click", function(event) {
-      marvelResultContainer =""
-      offsetCount = offsetCount+limit
-      marvelAPICall();
-    });
+  offset = 0;
 
-    fetch(marvelAPIQueryURL)
-      .then(function(response) {
-      return response.json();
-      })
-      .then(function(data) {
-        var marvelAPIData = data.data.results;
-        if(category=="characters") {
-          function characterDisplay (){ 
-            searchResultsText.innerHTML = "Search results for: "
-            searchParameters.innerHTML = " All characters";
+  if(characterSelect.checked&&comicSelect.checked) {
+  } else if(characterSelect.checked) {
+    category = "characters";
+    marvelAPICall(limit, offset);
+  } else if(comicSelect.checked) {
+      category = "comics";
+      marvelAPICall(limit, offset);
+  };
+
+  nextButton.setAttribute("class", "nextBttn show");
+  prevButton.setAttribute("class", "prevBttn show");
+});
+
+// Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
+function marvelAPICall (limit, offset) {
+  var marvelAPIQueryURL = "https://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash+"&limit="+limit+"&offset="+offset;
+  // if offset + results goes above total acount then last page and hide next button.
+  console.log(marvelAPIQueryURL);
+
+  fetch(marvelAPIQueryURL)
+    .then(function(response) {
+    return response.json();
+    })
+    .then(function(data) {
+      totalCount = data.data.total;
+      var marvelAPIData = data.data.results;
+      console.log()
+      if(category=="characters") {
+        function characterDisplay (){ 
+          searchParameters.innerHTML = "Showing "+totalCount+" results for all comics";
+          searchResultsBox.innerHTML = "";
+          for (var i = 0; i < marvelAPIData.length; i++) {
+            var marvelResultName = document.createElement("li");
+            var resultLink = document.createElement("a");
+            let dataName = (marvelAPIData[i].name);
+            marvelResultName.classList.add("marvel-result-name");
+            marvelResultName.textContent = marvelAPIData[i].name;
+            marvelResultName.setAttribute("data-charName",dataName);
+            marvelResultName.append(resultLink);
+            marvelResultContainer.append(marvelResultName);
+            marvelResultName.addEventListener("click", callGoogle);
+          };
+        }; characterDisplay();
+
+      } else if(category=="comics") { 
+          function comicDisplay (){ 
+            searchParameters.innerHTML = "Showing "+totalCount+" results for all comics";
             searchResultsBox.innerHTML = "";
             for (var i = 0; i < marvelAPIData.length; i++) {
               var marvelResultName = document.createElement("li");
               var resultLink = document.createElement("a");
-              let dataName = (marvelAPIData[i].name);
+              let dataName = (marvelAPIData[i].title);
               marvelResultName.classList.add("marvel-result-name");
-              marvelResultName.textContent = marvelAPIData[i].name;
+              marvelResultName.textContent = marvelAPIData[i].title;
               marvelResultName.setAttribute("data-charName",dataName);
               marvelResultName.append(resultLink);
               marvelResultContainer.append(marvelResultName);
               marvelResultName.addEventListener("click", callGoogle);
             };
-          }; characterDisplay();
+          }; comicDisplay();
+        };
+    });
+};
 
-        } else if(category=="comics") { 
-            function comicDisplay (){ 
-              searchResultsText.innerHTML = "Search results for: "
-              searchParameters.innerHTML = " All comics";
-              searchResultsBox.innerHTML = "";
-              for (var i = 0; i < marvelAPIData.length; i++) {
-                var marvelResultName = document.createElement("li");
-                var resultLink = document.createElement("a");
-                let dataName = (marvelAPIData[i].title);
-                marvelResultName.classList.add("marvel-result-name");
-                marvelResultName.textContent = marvelAPIData[i].title;
-                marvelResultName.setAttribute("data-charName",dataName);
-                marvelResultName.append(resultLink);
-                marvelResultContainer.append(marvelResultName);
-                marvelResultName.addEventListener("click", callGoogle)
-              };
-            }; comicDisplay();
-          };
-      });
-  };
-  nextButton.setAttribute("class", "nextBttn show");
+// var totalResultCount
+nextButton.addEventListener("click", function(event) {
+  if(offset >=totalCount) {
+    return;
+  }
+  marvelResultContainer.innerHTML = "";
+  offset = offset + 20;
+  marvelAPICall(limit, offset);
 });
 
+prevButton.addEventListener("click", function(event) {
+  if(offset == 0) {
+    return;
+  };
+  marvelResultContainer.innerHTML = "";
+  offset = offset - 20;
+  marvelAPICall(limit, offset);
+});
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
 
     var searchTerm = this.getAttribute("data-charName")
-    searchResultsText.innerHTML = "Get inspired by "
-    searchParameters.innerHTML = "" + searchTerm;
+    searchParameters.innerHTML = "Get inspired by " + searchTerm;
 
     logHistory(searchTerm);
     displaySearchHistory();
