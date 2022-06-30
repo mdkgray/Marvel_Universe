@@ -1,7 +1,6 @@
 var marvelResultContainer = document.getElementById("searchResults");
 var searchButton = document.getElementById("searchButton");
 var characterSelect = document.getElementById("characterInput");
-var movieSelect = document.getElementById("movieInput");
 var comicSelect = document.getElementById("comicInput");
 var nextButton = document.querySelector(".nextBttn");
 var marvelResults = document.querySelector(".marvel-result-name");
