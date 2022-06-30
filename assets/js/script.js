@@ -10,6 +10,7 @@ var searchHistoryArray = [];
 
 var searchResultsBox = document.getElementById("searchResults");
 var searchParameters = document.querySelector(".searchParameters");
+var searchResultsText = document.querySelector(".searchResultsText");
 
 var category ="";
 
@@ -95,6 +96,7 @@ searchButton.addEventListener("click", function (event) {
         var marvelAPIData = data.data.results;
         if(category=="characters") {
           function characterDisplay (){ 
+            searchResultsText.innerHTML = "Search results for: "
             searchParameters.innerHTML = " All characters";
             searchResultsBox.innerHTML = "";
             for (var i = 0; i < marvelAPIData.length; i++) {
@@ -112,6 +114,7 @@ searchButton.addEventListener("click", function (event) {
 
         } else if(category=="comics") { 
             function comicDisplay (){ 
+              searchResultsText.innerHTML = "Search results for: "
               searchParameters.innerHTML = " All comics";
               searchResultsBox.innerHTML = "";
               for (var i = 0; i < marvelAPIData.length; i++) {
@@ -136,7 +139,8 @@ searchButton.addEventListener("click", function (event) {
 function callGoogle() {
 
     var searchTerm = this.getAttribute("data-charName")
-    searchParameters.innerHTML = " " + searchTerm;
+    searchResultsText.innerHTML = "Get inspired by "
+    searchParameters.innerHTML = "" + searchTerm;
 
     logHistory(searchTerm);
     displaySearchHistory();
