@@ -23,7 +23,7 @@ header {
 }
 
 .footer {
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -57,3 +57,9 @@ header {
     width: auto;
     height: auto;
 }
+
+ul li:hover {
+    cursor: pointer;
+    color: red;
+    border-radius: 3px;
+} 
