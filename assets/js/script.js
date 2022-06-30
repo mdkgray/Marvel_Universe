@@ -72,11 +72,10 @@ searchButton.addEventListener("click", function (event) {
       var category = "comics";
       marvelAPICall();
   };
-// Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
+// Heres the Marvel API call
   function marvelAPICall () {
     var limit = 20
     var offset = 20
-    var totalResultCount
     var marvelAPIQueryURL = "https://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash+"&limit="+limit+"&offset="+offset;
     // if offset + results goes above total acount then last page and hide next button.
     console.log(marvelAPIQueryURL)
@@ -145,18 +144,16 @@ function callGoogle() {
     logHistory(searchTerm);
     displaySearchHistory();
 
-// Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
+// Heres the Google API call. 
   function googleAPIcall(){
   var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
   var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"marvel"+"&searchType=image";
-  // &callback=hndlr"
 
   fetch(queryURL)
     .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        console.log(data);
 
         var googleAPIData = data.items;
         console.log(googleAPIData);
@@ -167,9 +164,9 @@ function callGoogle() {
           let imageElement = document.createElement("img");
           imageElement.classList.add("imageEl");
           let imgThumbLink = data.items[i].image.thumbnailLink;
-          let imgLink = data.items[i].image.link;
+          // let imgLink = data.items[i].image.link;
           searchResultsBox.appendChild(imageElement);
-          searchResultsBox.setAttribute("data-imgEL", imgLink);
+          // searchResultsBox.setAttribute("data-imgEL", imgLink);
           imageElement.setAttribute("src", imgThumbLink);  
           }
         })  
