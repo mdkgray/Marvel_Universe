@@ -179,6 +179,8 @@ function callGoogle() {
         var googleAPIData = data.items;
         console.log(googleAPIData);
         searchResultsBox.innerHTML = "";
+        nextButton.setAttribute("class", "nextBttn hide");
+        prevButton.setAttribute("class", "prevBttn hide");
 
         for(let i = 0; i < googleAPIData.length; i++) {
           var resultCard = document.createElement("div");
@@ -198,6 +200,8 @@ function callGoogle() {
           var googleAPIData = data.items;
           console.log(googleAPIData);
           searchResultsBox.innerHTML = "";
+          nextButton.setAttribute("class", "nextBttn hide");
+          prevButton.setAttribute("class", "prevBttn hide");
   
           for(let i = 0; i < googleAPIData.length; i++) {
             if (data.items[i].hasOwnProperty("image")) {
