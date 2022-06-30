@@ -61,5 +61,9 @@ header {
 ul li:hover {
     cursor: pointer;
     color: red;
-    border-radius: 3px;
 } 
+
+.card:hover {
+    box-shadow: 0px 0px 20px red;
+    cursor: pointer;
+}
