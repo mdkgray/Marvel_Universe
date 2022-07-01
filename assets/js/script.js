@@ -1,18 +1,23 @@
-var marvelResultContainer = document.getElementById("searchResults");
-var searchButton = document.getElementById("searchButton");
+// variables for switch button selection 
 var characterSelect = document.getElementById("characterInput");
 var comicSelect = document.getElementById("comicInput");
+
+// variables for buttons
+var searchButton = document.getElementById("searchButton");
+var clearHistoryBttn = document.querySelector("#clearHistoryBttn");
 var nextButton = document.querySelector(".nextBttn");
 var prevButton = document.querySelector(".prevBttn");
-var marvelResults = document.querySelector(".marvel-result-name");
 
+// variables for search results 
 var searchHistoryDisplay = document.querySelector("#searchHistory");
 var searchHistoryArray = [];
-
 var searchResultsBox = document.getElementById("searchResults");
 var searchParameters = document.querySelector(".searchParameters");
 var searchResultsText = document.querySelector(".searchResultsText");
+var marvelResults = document.querySelector(".marvel-result-name");
+var marvelResultContainer = document.getElementById("searchResults");
 
+// variables for pagination
 var category ="";
 var limit = 20;
 var offset = 0;
@@ -136,7 +141,7 @@ function marvelAPICall (limit, offset) {
     });
 };
 
-// var totalResultCount
+// next button function
 nextButton.addEventListener("click", function(event) {
   if(offset >=totalCount) {
     return;
@@ -146,6 +151,7 @@ nextButton.addEventListener("click", function(event) {
   marvelAPICall(limit, offset);
 });
 
+// previous button function
 prevButton.addEventListener("click", function(event) {
   if(offset == 0) {
     return;
@@ -154,6 +160,7 @@ prevButton.addEventListener("click", function(event) {
   offset = offset - 20;
   marvelAPICall(limit, offset);
 });
+
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
 
@@ -163,7 +170,7 @@ function callGoogle() {
     logHistory(searchTerm);
     displaySearchHistory();
 
-// Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
+  // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
   function googleAPIcall(){
   var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
   var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"Marvel"+"&searchType=image";
@@ -248,4 +255,13 @@ function displaySearchHistory() {
         searchHistoryItem.textContent = searchHistoryArray[i];
         searchHistoryDisplay.appendChild(searchHistoryItem);
     }
+};
+
+// event listener for clear search history
+clearHistoryBttn.addEventListener("click", clearSearchHistory);
+
+// function to clear search history
+function clearSearchHistory() {
+    localStorage.clear();
+    searchHistoryDisplay.innerHTML = "";
 };
