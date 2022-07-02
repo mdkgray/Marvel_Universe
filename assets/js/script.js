@@ -4,9 +4,11 @@ var comicSelect = document.getElementById("comicInput");
 
 // variables for buttons
 var searchButton = document.getElementById("searchButton");
-var clearHistoryBttn = document.querySelector("#clearHistoryBttn");
+var clearHistoryBttn = document.getElementById("clearHistoryBttn");
+var clearBttn = document.getElementById("clearBttn");
 var nextButton = document.querySelector(".nextBttn");
 var prevButton = document.querySelector(".prevBttn");
+
 
 // variables for search results 
 var searchHistoryDisplay = document.querySelector("#searchHistory");
@@ -24,12 +26,13 @@ var offset = 0;
 var offsetCount = 0;
 var totalCount;
 
-// //Marvel API Hash
+// Marvel API Hash
 var timeStamp = dayjs().unix();
 var marvelAPIKey = "9994656a02f0ce9c84fd8dfa11d66b24";
 var hashString = timeStamp+"df27d4d6846ba6ac7b38d0f10f87f913ccdbb401"+marvelAPIKey
 var hash = md5(hashString);
 
+// Function to create the Hash needed to authenticate the Marvel API call
 function md5(hashString) {
   var hc="0123456789abcdef";
   function rh(n) {var j,s="";for(j=0;j<=3;j++) s+=hc.charAt((n>>(j*8+4))&0x0F)+hc.charAt((n>>(j*8))&0x0F);return s;}
@@ -73,10 +76,11 @@ function md5(hashString) {
   return rh(a)+rh(b)+rh(c)+rh(d);
 }
 
-// <!--Code to implement dynamic select to API Call-->
+// Search button event listener to call Marvel API
 searchButton.addEventListener("click", function (event) {
   offset = 0;
 
+// Code to implement dynamic select to API Call
   if(characterSelect.checked&&comicSelect.checked) {
   } else if(characterSelect.checked) {
     category = "characters";
@@ -86,6 +90,7 @@ searchButton.addEventListener("click", function (event) {
       marvelAPICall(limit, offset);
   };
 
+  // displaySearchHistory();
   nextButton.setAttribute("class", "nextBttn show");
   prevButton.setAttribute("class", "prevBttn show");
 });
@@ -169,8 +174,7 @@ function callGoogle() {
 
     logHistory(searchTerm);
     displaySearchHistory();
-
-  // Heres the Google API call. The data is logged to the console, however I'm still working on getting it to display. 
+  // Google API call.
   function googleAPIcall(){
   var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
   var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"Marvel"+"&searchType=image";
@@ -250,6 +254,7 @@ function logHistory(searchTerm) {
 function displaySearchHistory() {
     var searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory"));
     searchHistoryDisplay.innerHTML = ""
+    clearBttn.setAttribute("class", "show");
     for (var i = 0; i < searchHistoryArray.length; i++) {
         var searchHistoryItem = document.createElement("li");
         searchHistoryItem.textContent = searchHistoryArray[i];
@@ -264,4 +269,5 @@ clearHistoryBttn.addEventListener("click", clearSearchHistory);
 function clearSearchHistory() {
     localStorage.clear();
     searchHistoryDisplay.innerHTML = "";
+    clearBttn.setAttribute("class", "hide");
 };

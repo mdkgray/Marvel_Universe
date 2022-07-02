@@ -33,14 +33,6 @@ header {
     background-color: black;
 }
 
-.hide {
-    display: none;
-}
-
-.show {
-    display: block;
-}
-
 .nextBttn{
     margin-bottom: -24px;
 }
@@ -70,4 +62,12 @@ ul li:hover {
 
 #clearHistoryBttn {
     margin-bottom: 15px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
