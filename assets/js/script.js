@@ -19,6 +19,7 @@ var searchParameters = document.querySelector(".searchParameters");
 var searchResultsText = document.querySelector(".searchResultsText");
 var marvelResults = document.querySelector(".marvel-result-name");
 var searchResultsContainer = document.getElementById("searchResults");
+var searchTerm;
 
 // variables for pagination
 var category ="";
@@ -112,7 +113,6 @@ function marvelAPICall (limit, offset) {
     .then(function(data) {
       totalCount = data.data.total;
       var marvelAPIData = data.data.results;
-      console.log()
       if(category=="characters") {
         function characterDisplay (){ 
           searchParameters.innerHTML = "Showing "+totalCount+" results for all comics";
@@ -126,7 +126,7 @@ function marvelAPICall (limit, offset) {
             marvelResultName.setAttribute("data-charName",dataName);
             marvelResultName.append(resultLink);
             searchResultsContainer.append(marvelResultName);
-            marvelResultName.addEventListener("click", callGoogle);
+            marvelResultName.addEventListener("click",callGoogle);
           };
         }; characterDisplay();
 
@@ -143,14 +143,14 @@ function marvelAPICall (limit, offset) {
               marvelResultName.setAttribute("data-charName",dataName);
               marvelResultName.append(resultLink);
               searchResultsContainer.append(marvelResultName);
-              marvelResultName.addEventListener("click", callGoogle);
+              marvelResultName.addEventListener("click",callGoogle);
             };
           }; comicDisplay();
         };
     });
 };
 
-// next button function
+// Next & Previous button functions
 nextButton.addEventListener("click", function(event) {
   if(offset >=totalCount) {
     return;
@@ -159,8 +159,6 @@ nextButton.addEventListener("click", function(event) {
   offset = offset + 20;
   marvelAPICall(limit, offset);
 });
-
-// previous button function
 prevButton.addEventListener("click", function(event) {
   if(offset == 0) {
     return;
@@ -177,7 +175,7 @@ prevButton.addEventListener("click", function(event) {
 //   }
 //   searchResultsContainer.innerHTML = "";
 //   offset = offset + 20;
-//   callGoogle(limit, offset);
+//   googleAPICall();
 // });
 
 // // previous button function
@@ -187,7 +185,7 @@ prevButton.addEventListener("click", function(event) {
 //   };
 //   searchResultsContainer.innerHTML = "";
 //   offset = offset - 20;
-//   callGoogle(limit, offset);
+//   googleAPICall();
 // });
 
 // Function to Call Google API with Marvel search Term
@@ -197,14 +195,14 @@ function callGoogle() {
 
     logHistory(searchTerm);
     displaySearchHistory();
-
   // Google API call.
   function googleAPICall(limit, offset){
     var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
     var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"Marvel"+"&searchType=image&limit="+limit+"&offset="+offset;
+    console.log(queryURL);
 
-    gNextButton.setAttribute("class", "show");
-    gPrevButton.setAttribute("class", "show");
+    // gNextButton.setAttribute("class", "show");
+    // gPrevButton.setAttribute("class", "show");
 
     fetch(queryURL)
       .then(function (response) {
@@ -212,7 +210,6 @@ function callGoogle() {
         })
         .then(function (data) {
           console.log(data);
-
           if(category=="characters") {;
           var googleAPIData = data.items;
           console.log(googleAPIData);
@@ -249,7 +246,6 @@ function callGoogle() {
                 imageElement.setAttribute("src", imgThumbLink);
                 resultCard.appendChild(imageElement);
                 searchResultsContainer.appendChild(resultCard);
-                // searchResultsContainer.setAttribute("data-imgEL", imgLink);
               } else {
                 var resultCard = document.createElement("div");
                 resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
@@ -261,7 +257,6 @@ function callGoogle() {
                 imageElement.setAttribute("src", imgThumbLink);
                 resultCard.appendChild(imageElement);
                 searchResultsContainer.appendChild(resultCard);
-                // searchResultsContainer.setAttribute("data-imgEL", imgLink);
               }; 
             };
           };
@@ -276,7 +271,6 @@ function callGoogle() {
 function logHistory(searchTerm) {
     searchHistoryArray.push(searchTerm);
     localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
-    console.log(searchHistoryArray);
 };
 
 // Display search history to page 
@@ -297,6 +291,7 @@ clearHistoryBttn.addEventListener("click", clearSearchHistory);
 // function to clear search history
 function clearSearchHistory() {
     localStorage.clear();
+    searchHistoryArray = [];
     searchHistoryDisplay.innerHTML = "";
     clearBttn.setAttribute("class", "hide");
 };
