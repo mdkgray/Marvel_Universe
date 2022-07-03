@@ -26,10 +26,10 @@
             <div id="headerText" class="mainTitle text-center p-4 mb-2 text-white">
                 <h1 class="h1 text-center p-4 mb-2 text-white display-1">MARVELLOUS</h1>
                 <h4>Welcome to the Marvel Universe where you can view images of your favourite characters and comics of your choice</h4>
-                <img src="./assets/Images/marvel_icons/captain.png" alt="captain-america"/>
-                <img src="./assets/Images/marvel_icons/iron-man (2).png" alt="ironman"/>
-                <img src="./assets/Images/marvel_icons/spiderman (3).png" alt="spiderman"/>
-                <img src="./assets/Images/marvel_icons/mjolnir.png" alt="thor"/>
+                <img src="assets/images/marvel_icons/captain.png" alt="captain-america"/>
+                <img src="assets/images/marvel_icons/iron-man (2).png" alt="ironman"/>
+                <img src="assets/images/marvel_icons/spiderman (3).png" alt="spiderman"/>
+                <img src="assets/images/marvel_icons/mjolnir.png" alt="thor"/>
             </div>
         </div>
     </header>
@@ -48,13 +48,14 @@
                         <input id ="comicInput" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Comic</label>
                     </div>
-                    <button id="searchButton" type="button"class="searchButton btn btn-primary" type="button">Search</button>
+                    <button id="searchButton" type="button"class="searchButton btn btn-primary" type="button"> <a href="#" simple-tooltip="Sorry please select one"></a>Search</button>
                 </div>
                 <br>
                 <!-- Search history section -->
                 <div>
                     <h2 class="text-center">Search History</h2>
                     <ul id="searchHistory" class="searchHistory"></ul>
+                    <div id="clearBttn" class="hide"><button id="clearHistoryBttn" type="button" class="btn btn-outline-secondary d-grid gap-2 col-6 mx-auto" type="button">Clear History</button></div>
                 </div>
             </div>
             <!-- Search results section -->
@@ -62,18 +63,24 @@
                 <div class="resultsSection">
                   <h2><span class="searchResultsText"></span><span class="searchParameters"></span></h2>
                   <ul id="searchResults" class="row"></ul>
-                  <div id="content"></div>
                 </div>
+                <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center">
+                    <li id="prevBttn" class="hide page-item"><a class="page-link" tabindex="-1">Previous</a></li>
+                    <li id="nextBttn" class="hide page-item"><a class="page-link">Next</a></li>
+                  </ul>
+                  <ul class="pagination justify-content-center">
+                    <li id="gPrevBttn" class="hide page-item"><a class="page-link" tabindex="-1">Previous</a></li>
+                    <li id="gNextBttn" class="hide page-item"><a class="page-link">Next</a></li>
+                  </ul>
+                </nav>
             </div>
-            
         </div>       
     </div>
 
   <!-- This is the footer-->
   <footer>
     <div class="footer">
-      <button class="prevBttn hide">Prev</button>
-      <button class="nextBttn hide">Next</button>
       <p class="text-center">Data provided by Marvel. © 2014 Marvel</p>
     </div>
   </footer>
