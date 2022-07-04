@@ -10,10 +10,184 @@ html {
 body {
     background-color: black;
     color: white;
+    cursor: url("../images/Cursor.png"), auto;
 }
 
 header {
-    background-color: rgb(158, 4, 4);
+    display: flex;   
+    position: relative;     
+    width: 100%;
+    height: 60vh;                
+    padding: 0px;  
+    opacity: 100%; 
+    background-image: url("../images/8kBackground.jpg");
+    background-size: 100%;  
+    background-position: fixed;                    
+    background-repeat: no-repeat;  
+}
+
+.mainTitle {          
+    display: flex;      
+    justify-content: center;  
+    width: 100vw;
+    height: 20vh;   
+    padding: 0px;      
+    text-transform: uppercase;
+    font-family: verdana;
+    font-size: 6.5vw;
+    font-weight: 700;    
+    color: rgb(255, 0, 0);
+    text-align: center;
+    font-style: italic;
+    text-shadow: 1px 1px 1px #000000,
+        1px 2px 1px #000000,
+        1px 3px 1px #000000,
+        1px 4px 1px #000000,
+        1px 5px 1px #000000,
+        1px 6px 1px #ff8c00,
+        1px 7px 1px #ff8c00,
+        1px 8px 1px #ff8c00,
+        1px 9px 1px #ff8c00,
+        1px 10px 1px #ff8c00,
+    1px 18px 6px rgb(255, 251, 0),
+    1px 22px 10px rgba(255, 221, 0, 0.4),
+    1px 25px 35px rgba(255, 221, 0, 0.4),
+    1px 30px 60px rgba(255, 221, 0, 0.4);
+}
+
+#searchButton {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: url("../images/Cursor2.png"), auto;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+#searchButton:before {
+    content: "";
+    background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+    0% {
+    background-position: 0 0;
+    }
+    50% {
+    background-position: 400% 0;
+    }
+    100% {
+    background-position: 0 0;
+    }
+}
+
+#searchButton:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+
+#clearHistoryBttn {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: #111;
+    cursor: url("../images/Cursor2.png"), auto;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+#clearHistoryBttn:before {
+    content: "";
+    background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+    0% {
+    background-position: 0 0;
+    }
+    50% {
+    background-position: 400% 0;
+    }
+    100% {
+    background-position: 0 0;
+    }
+}
+
+#clearHistoryBttn:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
 }
 
 .marvel-result-name {
@@ -48,13 +222,13 @@ header {
 }
 
 ul li:hover {
-    cursor: pointer;
+    cursor: url("../images/Cursor.png"), auto;
     color: rgba(255, 0, 0, 0.7);
 } 
 
 .card:hover {
     box-shadow: 0px 0px 20px red;
-    cursor: pointer;
+    cursor: url("../images/Cursor.png"), auto;
 }
 
 #clearHistoryBttn {
@@ -68,46 +242,3 @@ ul li:hover {
 .show {
     display: block;
 }
-
-/* If both checkboxes are selected, this is the tooltip styling */
-.rxtooltip [simple-tooltip] {
-        position: relative;
-        z-index: 2;
-        cursor: pointer;
-      }
-      .rxtooltip [simple-tooltip]:before {
-        margin-bottom: 5px;
-        margin-left: -80px;
-        padding: 10px;
-        width: 160px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        background-color: rgb(158, 4, 4);
-        background-color: rgb(158, 4, 4);
-        color: rgb(255, 255, 255);
-        content: attr(simple-tooltip);
-        text-align: center;
-        font-size: 14px;
-        line-height: 1.2;
-        text-decoration: underline;
-        font-family: 'Staatliches', cursive;
-      }
-      .rxtooltip [simple-tooltip]:after {
-        margin-left: -5px;
-        width: 0;
-        border-top: 5px solid rgb(158, 4, 4);
-        border-top: 5px solid rgb(158, 4, 4);
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-        content: " ";
-        font-size: 0;
-        line-height: 0;
-      }
-      .rxtooltip [simple-tooltip]:hover:before,
-      .rxtooltip [simple-tooltip]:hover:after {
-        visibility: visible;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-        filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
-        opacity: 1;
-      }      
