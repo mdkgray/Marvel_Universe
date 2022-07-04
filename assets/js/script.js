@@ -34,6 +34,9 @@ var marvelAPIKey = "9994656a02f0ce9c84fd8dfa11d66b24";
 var hashString = timeStamp+"df27d4d6846ba6ac7b38d0f10f87f913ccdbb401"+marvelAPIKey
 var hash = md5(hashString);
 
+
+var searchTerm;
+
 // Function to create the Hash needed to authenticate the Marvel API call
 function md5(hashString) {
   var hc="0123456789abcdef";
@@ -173,80 +176,102 @@ prevButton.addEventListener("click", function(event) {
   marvelAPICall(limit, offset);
 });
 
-// Function to Call Google API with Marvel search Term
-function callGoogle() {
-    var searchTerm = this.getAttribute("data-charName")
-    searchParameters.innerHTML = "Get inspired by\:  " + searchTerm;
+// Next & Previous button functions
+gNextButton.addEventListener("click", function(event) {
+  if(offset >=totalCount) {
+    return;
+  }
+  searchResultsContainer.innerHTML = "";
+  offset = offset + 20;
+  googleAPICall(searchTerm,limit, offset);
+});
 
-    logHistory(searchTerm);
-    displaySearchHistory();
-  // Google API call.
-  function googleAPICall(limit, offset){
-    var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
-    var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"Marvel"+"&searchType=image&limit="+limit+"&offset="+offset;
-    console.log(queryURL);
+gPrevButton.addEventListener("click", function(event) {
+  if(offset == 0) {
+    return;
+  };
+  searchResultsContainer.innerHTML = "";
+  offset = offset - 20;
+  googleAPICall(searchTerm, limit, offset);
+});
 
-    fetch(queryURL)
-      .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          console.log(data);
-          if(category=="characters") {;
+// Google API call.
+function googleAPICall(searchTerm, limit, offset){
+  var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
+  var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"Marvel"+"&searchType=image&limit="+limit+"&start="+offset;
+  console.log(queryURL);
+
+  fetch(queryURL)
+    .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        if(category=="characters") {;
+        var googleAPIData = data.items;
+        console.log(googleAPIData);
+        searchResultsContainer.innerHTML = "";
+
+        for(let i = 0; i < googleAPIData.length; i++) {
+          var resultCard = document.createElement("div");
+          resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
+
+          let imageElement = document.createElement("img");
+          imageElement.classList.add("imageEl");
+          let imgThumbLink = data.items[i].image.thumbnailLink;
+
+          imageElement.setAttribute("src", imgThumbLink); 
+          resultCard.appendChild(imageElement);
+          searchResultsContainer.appendChild(resultCard);
+          // searchResultsContainer.setAttribute("data-imgEL", imgLink);
+          };
+
+        } else if(category=="comics") {
           var googleAPIData = data.items;
           console.log(googleAPIData);
           searchResultsContainer.innerHTML = "";
-
+  
           for(let i = 0; i < googleAPIData.length; i++) {
-            var resultCard = document.createElement("div");
-            resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
+            if (data.items[i].hasOwnProperty("image")) {
+              var resultCard = document.createElement("div");
+              resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
 
-            let imageElement = document.createElement("img");
-            imageElement.classList.add("imageEl");
-            let imgThumbLink = data.items[i].image.thumbnailLink;
+              let imageElement = document.createElement("img");
+              imageElement.classList.add("imageEl");
+              let imgThumbLink = data.items[i].image.thumbnailLink;
 
-            imageElement.setAttribute("src", imgThumbLink); 
-            resultCard.appendChild(imageElement);
-            searchResultsContainer.appendChild(resultCard);
-            // searchResultsContainer.setAttribute("data-imgEL", imgLink);
-            };
+              imageElement.setAttribute("src", imgThumbLink);
+              resultCard.appendChild(imageElement);
+              searchResultsContainer.appendChild(resultCard);
+            } else {
+              var resultCard = document.createElement("div");
+              resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
 
-          } else if(category=="comics") {
-            var googleAPIData = data.items;
-            console.log(googleAPIData);
-            searchResultsContainer.innerHTML = "";
-    
-            for(let i = 0; i < googleAPIData.length; i++) {
-              if (data.items[i].hasOwnProperty("image")) {
-                var resultCard = document.createElement("div");
-                resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
+              let imageElement = document.createElement("img");
+              imageElement.classList.add("imageEl");
+              let imgThumbLink = data.items[i].pagemap.cse_thumbnail[0].src;
 
-                let imageElement = document.createElement("img");
-                imageElement.classList.add("imageEl");
-                let imgThumbLink = data.items[i].image.thumbnailLink;
-
-                imageElement.setAttribute("src", imgThumbLink);
-                resultCard.appendChild(imageElement);
-                searchResultsContainer.appendChild(resultCard);
-              } else {
-                var resultCard = document.createElement("div");
-                resultCard.classList.add('card', 'bg-dark', 'border-white', 'cols-sm-3', 'w-10', 'p-3', 'm-3');
-
-                let imageElement = document.createElement("img");
-                imageElement.classList.add("imageEl");
-                let imgThumbLink = data.items[i].pagemap.cse_thumbnail[0].src;
-
-                imageElement.setAttribute("src", imgThumbLink);
-                resultCard.appendChild(imageElement);
-                searchResultsContainer.appendChild(resultCard);
-              }; 
-            };
+              imageElement.setAttribute("src", imgThumbLink);
+              resultCard.appendChild(imageElement);
+              searchResultsContainer.appendChild(resultCard);
+            }; 
           };
-        });
-  };
-  googleAPICall();
+        };
+      });
+};
+
+// Function to Call Google API with Marvel search Term
+function callGoogle() {
+    searchTerm = this.getAttribute("data-charName")
+    searchParameters.innerHTML = "Get inspired by\:  " + searchTerm;
+    offset = 0;
+    logHistory(searchTerm);
+    displaySearchHistory();
+  googleAPICall(searchTerm, limit, offset);
   nextButton.setAttribute("class", "hide");
   prevButton.setAttribute("class", "hide");
+  gNextButton.setAttribute("class", "show");
+  gPrevButton.setAttribute("class", "show");
 };
 
 // Log search history to local storage

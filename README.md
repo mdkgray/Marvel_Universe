@@ -51,6 +51,7 @@ The application is deployed on the GitHub repository and URL above
 ![Screenshot-4](./assets/images/screenshots/screenshot_4.PNG)
 
 ## Credits
+- https://developers.google.com/custom-search/
 - https://github.com/iamkun/dayjs
 - https://day.js.org/docs/en/display/unix-timestamp
 - https://day.js.org/docs/en/installation/browser
