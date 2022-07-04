@@ -20,7 +20,7 @@ header {
     height: 60vh;                
     padding: 0px;  
     opacity: 100%; 
-    background-image: url("../images/8kbackground.jpg");
+    background-image: url("../images/8kBackground.jpg");
     background-size: 100%;  
     background-position: fixed;                    
     background-repeat: no-repeat;  
