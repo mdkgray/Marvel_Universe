@@ -61,8 +61,8 @@ The application is deployed on the GitHub repository and URL above
 
 ## Acknowledgements
 - University of Sydney Coding Bootcamp 
-- Marvel API 
-- Google Images API
+- [Marvel API](https://developer.marvel.com/)
+- [Google Images API](https://developers.google.com/custom-search/)
 
 ## Badges
 [![](https://data.jsdelivr.com/v1/package/npm/dayjs/badge)](https://www.jsdelivr.com/package/npm/dayjs)
