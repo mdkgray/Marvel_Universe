@@ -22,6 +22,8 @@ HTML:
 
 CSS:
 - Styling for basic components of the page 
+- Styling for buttons on the page
+- Adding cursor styles
 - Specifying font family using Google Fonts
 - Styling of result list generated from Marvel API call
 - Styling of images returned by Google API call
@@ -39,11 +41,14 @@ JavaScript:
 ## Website URL
 [Click here to view website](https://mdkgray.github.io/marvel_universe/)
 
-## Screenshots
-
-
 ## Project Status
 The application is deployed on the GitHub repository and URL above
+
+## Screenshots
+![Screenshot-1](./assets/images/screenshots/screenshot_1.PNG)
+![Screenshot-2](./assets/images/screenshots/screenshot_2.PNG)
+![Screenshot-3](./assets/images/screenshots/screenshot_3.PNG)
+![Screenshot-4](./assets/images/screenshots/screenshot_4.PNG)
 
 ## Credits
 - https://github.com/iamkun/dayjs
@@ -52,9 +57,9 @@ The application is deployed on the GitHub repository and URL above
 - https://ourcodeworld.com/articles/read/1547/how-to-create-md5-hashes-in-javascript
 - https://stackoverflow.com/questions/1655769/fastest-md5-implementation-in-javascript/60467595#60467595
 - https://www.javascripttutorial.net/object/javascript-check-if-property-exists/
+- https://codeconvey.com/simple-css-tooltip-with-arrow-position-to-the-bottom/
 
 ## Acknowledgements
-
 - University of Sydney Coding Bootcamp 
 - Marvel API 
 - Google Images API
