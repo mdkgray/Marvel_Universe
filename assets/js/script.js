@@ -292,7 +292,7 @@ function displaySearchHistory() {
 };
 
 // event listener for clear search history
-clearHistoryBttn.addEventListener("click", clearSearchHistory);
+clearBttn.addEventListener("click", clearSearchHistory);
 
 // function to clear search history
 function clearSearchHistory() {
