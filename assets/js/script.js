@@ -82,13 +82,19 @@ function md5(hashString) {
 searchButton.addEventListener("click", function (event) {
   offset = 0;
 
-// Code to implement dynamic select to API Call
+// If conditions to decide what checkboxes are active and how to proceed
 function dynamicSelect() { 
+
 if(characterSelect.checked&&comicSelect.checked) {
-  } else if(characterSelect.checked) {
+  searchButton.classList.add("searchButton", "btn", "btn-primary", "rxtooltip");
+  } 
+  else if(characterSelect.checked) {
+    searchButton.classList.remove("rxtooltip");
     category = "characters";
     marvelAPICall(limit, offset);
-  } else if(comicSelect.checked) {
+  } 
+  else if(comicSelect.checked) {  
+    searchButton.classList.remove("rxtooltip");
       category = "comics";
       marvelAPICall(limit, offset);
   };
@@ -100,7 +106,7 @@ dynamicSelect();
 // displaySearchHistory();
 });
 
-// Heres the Marvel API call. The data is logged to the console, however I'm still working on getting it to display.
+// Heres the Marvel API call
 function marvelAPICall (limit, offset) {
   var marvelAPIQueryURL = "https://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash+"&limit="+limit+"&offset="+offset;
   // if offset + results goes above total acount then last page and hide next button.
