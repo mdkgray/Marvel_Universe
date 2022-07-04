@@ -84,32 +84,30 @@ searchButton.addEventListener("click", function (event) {
 
 // If conditions to decide what checkboxes are active and how to proceed
 function dynamicSelect() { 
-
-if(characterSelect.checked&&comicSelect.checked) {
-  searchButton.classList.add("searchButton", "btn", "btn-primary", "rxtooltip");
-  } 
-  else if(characterSelect.checked) {
-    searchButton.classList.remove("rxtooltip");
-    category = "characters";
-    marvelAPICall(limit, offset);
-  } 
-  else if(comicSelect.checked) {  
-    searchButton.classList.remove("rxtooltip");
-      category = "comics";
-      marvelAPICall(limit, offset);
-  };
+    if(characterSelect.checked&&comicSelect.checked) {
+    searchButton.classList.add("searchButton", "btn", "btn-primary", "rxtooltip");
+    } 
+    else if(characterSelect.checked) {
+        searchButton.classList.remove("rxtooltip");
+        category = "characters";
+        marvelAPICall(limit, offset);
+    } 
+    else if(comicSelect.checked) {  
+        searchButton.classList.remove("rxtooltip");
+        category = "comics";
+        marvelAPICall(limit, offset);
+    };
 };
-dynamicSelect();
 
+dynamicSelect();
   nextButton.setAttribute("class", "show");
   prevButton.setAttribute("class", "show");
-// displaySearchHistory();
 });
 
 // Heres the Marvel API call
 function marvelAPICall (limit, offset) {
   var marvelAPIQueryURL = "https://gateway.marvel.com/v1/public/"+category+"?ts="+timeStamp+"&apikey="+marvelAPIKey+"&hash="+hash+"&limit="+limit+"&offset="+offset;
-  // if offset + results goes above total acount then last page and hide next button.
+  // if offset + results goes above total count then last page and hide next button.
   console.log(marvelAPIQueryURL);
 
   fetch(marvelAPIQueryURL)
@@ -165,6 +163,7 @@ nextButton.addEventListener("click", function(event) {
   offset = offset + 20;
   marvelAPICall(limit, offset);
 });
+
 prevButton.addEventListener("click", function(event) {
   if(offset == 0) {
     return;
@@ -173,26 +172,6 @@ prevButton.addEventListener("click", function(event) {
   offset = offset - 20;
   marvelAPICall(limit, offset);
 });
-
-// // next button function
-// gNextButton.addEventListener("click", function(event) {
-//   if(offset >=totalCount) {
-//     return;
-//   }
-//   searchResultsContainer.innerHTML = "";
-//   offset = offset + 20;
-//   googleAPICall();
-// });
-
-// // previous button function
-// gPrevButton.addEventListener("click", function(event) {
-//   if(offset == 0) {
-//     return;
-//   };
-//   searchResultsContainer.innerHTML = "";
-//   offset = offset - 20;
-//   googleAPICall();
-// });
 
 // Function to Call Google API with Marvel search Term
 function callGoogle() {
@@ -206,9 +185,6 @@ function callGoogle() {
     var googleAPIKey = "AIzaSyD7sP34KCHB1bSqJZEouHRFLhFVPC9pu7w";
     var queryURL = "https://www.googleapis.com/customsearch/v1?key="+googleAPIKey+"&cx=716b6da6cc16aa14e&q="+searchTerm+"Marvel"+"&searchType=image&limit="+limit+"&offset="+offset;
     console.log(queryURL);
-
-    // gNextButton.setAttribute("class", "show");
-    // gPrevButton.setAttribute("class", "show");
 
     fetch(queryURL)
       .then(function (response) {
