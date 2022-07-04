@@ -194,6 +194,7 @@ body {
     position: relative;
     z-index: 2;
     cursor: pointer;
+    bottom: 40px;
 }
 
 .rxtooltip [simple-tooltip]:before {
@@ -211,13 +212,12 @@ body {
     text-align: center;
     font-size: 14px;
     line-height: 1.2;
-    text-decoration: underline;
     font-family: 'Staatliches', cursive;
 }
 
 .rxtooltip [simple-tooltip]:after {
     margin-left: -5px;
-    width: 0;
+    width: 100%;
     border-top: 5px solid rgb(158, 4, 4);
     border-top: 5px solid rgb(158, 4, 4);
     border-right: 5px solid transparent;
